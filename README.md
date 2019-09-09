@@ -44,8 +44,10 @@ Learn more about how to build your own scenes in our [documentation](https://doc
 
 This scene is protected with a standard Apache 2 licence. See the terms and conditions in the [LICENSE](/LICENSE) file.
 
-3D model from Sketchfab user Konta Johanna
-https://poly.google.com/view/1RET-GHtITG
-Soudn file from FreeSound user Terhen
-https://freesound.org/people/Terhen/sounds/234187/
+3D model from Sketchfab user [Konta Johanna](
+https://poly.google.com/view/1RET-GHtITG)
+
+Soudn file from FreeSound user [Terhen](
+https://freesound.org/people/Terhen/sounds/234187/)
+
 Both with creative commons licenses.

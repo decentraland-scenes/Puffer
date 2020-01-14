@@ -1,9 +1,11 @@
-import utils from "../node_modules/decentraland-ecs-utils/index"
-import { InterpolationType } from "../node_modules/decentraland-ecs-utils/transform/math/interpolation"
+import utils from '../node_modules/decentraland-ecs-utils/index'
+import { InterpolationType } from '../node_modules/decentraland-ecs-utils/transform/math/interpolation'
+
+import { getUserAccount } from '@decentraland/EthereumController'
 
 let puffer = new Entity()
 engine.addEntity(puffer)
-puffer.addComponent(new GLTFShape("models/puffer.gltf"))
+puffer.addComponent(new GLTFShape('models/puffer.gltf'))
 
 let pufferTransform = new Transform()
 puffer.addComponent(pufferTransform)
@@ -16,40 +18,48 @@ pufferTransform.scale = deflatedScale
 
 let isInflating = false
 
-let deflatedSound = new AudioClip("sounds/deflate.wav")
+let deflatedSound = new AudioClip('sounds/deflate.wav')
 puffer.addComponent(new AudioSource(deflatedSound))
 
-puffer.addComponent(new OnClick(
-	e => {
-		if (isInflating) return
-		isInflating = true
-		puffer.addComponent(new utils.ScaleTransformComponent(
-			deflatedScale,
-			inflatedScale,
-			1,
-			null,
-			InterpolationType.EASEINQUAD
-		))
-		puffer.addComponent(new utils.Delay(2000,
-			() => {
-				puffer.getComponent(AudioSource).playOnce()
-				puffer.addComponent(new utils.ScaleTransformComponent(
-					inflatedScale,
-					deflatedScale,
-					3,
-					() => {
-						isInflating = false
-					}
-				))
-			}
-		))
-	}
-))
-
+puffer.addComponent(
+  new OnPointerDown(
+    e => {
+      if (isInflating) return
+      isInflating = true
+      puffer.addComponent(
+        new utils.ScaleTransformComponent(
+          deflatedScale,
+          inflatedScale,
+          1,
+          null,
+          InterpolationType.EASEINQUAD
+        )
+      )
+      puffer.addComponent(
+        new utils.Delay(2000, () => {
+          puffer.getComponent(AudioSource).playOnce()
+          puffer.addComponent(
+            new utils.ScaleTransformComponent(
+              inflatedScale,
+              deflatedScale,
+              3,
+              () => {
+                isInflating = false
+              }
+            )
+          )
+        })
+      )
+    },
+    { button: ActionButton.POINTER, hoverText: 'Puff up!' }
+  )
+)
 
 let ground = new Entity()
 engine.addEntity(ground)
-ground.addComponent(new GLTFShape("models/FloorBaseDirt_01.glb"))
-ground.addComponent(new Transform({
-	position: new Vector3(8, 0, 8)
-}))
+ground.addComponent(new GLTFShape('models/FloorBaseDirt_01.glb'))
+ground.addComponent(
+  new Transform({
+    position: new Vector3(8, 0, 8)
+  })
+)

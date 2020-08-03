@@ -4,7 +4,7 @@ import { InterpolationType } from '../node_modules/decentraland-ecs-utils/transf
 import { getUserAccount } from '@decentraland/EthereumController'
 
 let puffer = new Entity()
-engine.addEntity(puffer)
+
 puffer.addComponent(new GLTFShape('models/puffer.gltf'))
 
 let pufferTransform = new Transform()
@@ -20,6 +20,8 @@ let isInflating = false
 
 let deflatedSound = new AudioClip('sounds/deflate.wav')
 puffer.addComponent(new AudioSource(deflatedSound))
+
+engine.addEntity(puffer)
 
 puffer.addComponent(
   new OnPointerDown(

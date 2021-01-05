@@ -1,6 +1,4 @@
 import utils from '../node_modules/decentraland-ecs-utils/index'
-import { InterpolationType } from '../node_modules/decentraland-ecs-utils/transform/math/interpolation'
-import { TriggerSphereShape } from '../node_modules/decentraland-ecs-utils/triggers/triggerSystem'
 
 /// Ground
 let ground = new Entity()
@@ -44,7 +42,7 @@ puffer.addComponent(
 // trigger when player walks near fish
 puffer.addComponent(
   new utils.TriggerComponent(
-    new TriggerSphereShape(2, Vector3.Zero()),
+    new utils.TriggerSphereShape(2, Vector3.Zero()),
     null,
     null,
     null,
@@ -71,7 +69,7 @@ function inflateFish() {
       inflatedScale,
       1,
       null,
-      InterpolationType.EASEINQUAD
+      utils.InterpolationType.EASEINQUAD
     )
   )
   

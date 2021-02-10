@@ -1,4 +1,4 @@
-import utils from '../node_modules/decentraland-ecs-utils/index'
+import * as utils from '@dcl/ecs-scene-utils'
 
 /// Ground
 let ground = new Entity()
@@ -41,16 +41,11 @@ puffer.addComponent(
 
 // trigger when player walks near fish
 puffer.addComponent(
-  new utils.TriggerComponent(
-    new utils.TriggerSphereShape(2, Vector3.Zero()),
-    null,
-    null,
-    null,
-    null,
-    () => {
+  new utils.TriggerComponent(new utils.TriggerSphereShape(2), {
+    onCameraEnter: () => {
       inflateFish()
-    }
-  )
+    },
+  })
 )
 
 // Flag to avoid re-triggering
@@ -61,7 +56,7 @@ function inflateFish() {
   // Avoid retriggering
   if (isInflating) return
   isInflating = true
-  
+
   // Enlarge
   puffer.addComponent(
     new utils.ScaleTransformComponent(
@@ -72,7 +67,7 @@ function inflateFish() {
       utils.InterpolationType.EASEINQUAD
     )
   )
-  
+
   // Wait, then shrink back
   puffer.addComponent(
     new utils.Delay(2000, () => {

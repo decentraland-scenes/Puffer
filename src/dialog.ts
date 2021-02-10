@@ -1,5 +1,5 @@
-import { Dialog } from '../node_modules/@dcl/ui-utils/utils/types'
-import { inflateFish } from './game'
+import { Dialog } from '@dcl/npc-scene-utils'
+import { inflateFish } from './pufferfish'
 
 export let FishTalk: Dialog[] = [
   {
@@ -37,19 +37,24 @@ export let FishTalk2: Dialog[] = [
   {
     text: `What do you come here for? This is my home. What do you want?`,
     isQuestion: true,
-    labelE: { label: `Just Chillin` },
-    labelF: { label: `Revenge!` },
-    ifPressE: 4,
-    ifPressF: 5,
-    triggeredByF: () => {
-      inflateFish()
-    },
+    buttons: [
+      { label: `Just Chillin`, goToDialog: 'ok' },
+      {
+        label: `Revenge!`,
+        goToDialog: 'revenge',
+        triggeredActions: () => {
+          inflateFish()
+        },
+      },
+    ],
   },
   {
+    name: 'ok',
     text: `Ok, all good then`,
     isEndOfDialog: true,
   },
   {
+    name: 'revenge',
     text: `Shit just got real!`,
     fontSize: 60,
     isEndOfDialog: true,

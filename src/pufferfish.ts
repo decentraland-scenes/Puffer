@@ -2,24 +2,24 @@ import * as utils from '@dcl/ecs-scene-utils'
 import { ammo, fishHealth, healthBar } from './ui'
 import * as ui from '@dcl/ui-scene-utils'
 
-let deflatedScale = new Vector3(0.05, 0.05, 0.065)
-let inflatedScale = new Vector3(0.11, 0.11, 0.075)
+const deflatedScale = new Vector3(0.05, 0.05, 0.065)
+const inflatedScale = new Vector3(0.11, 0.11, 0.075)
 
-let puffer = new Entity()
+const puffer = new Entity()
 
 puffer.addComponent(new GLTFShape('models/puffer.gltf'))
 
 puffer.addComponent(
   new Transform({
     position: new Vector3(8, 1, 8),
-    scale: deflatedScale,
+    scale: deflatedScale
   })
 )
 
 let isInflating = false
 
 // sound when deflating
-let deflatedSound = new AudioClip('sounds/deflate.wav')
+const deflatedSound = new AudioClip('sounds/deflate.wav')
 puffer.addComponent(new AudioSource(deflatedSound))
 
 engine.addEntity(puffer)
@@ -61,7 +61,7 @@ puffer.addComponent(
           true
         )
       }
-    },
+    }
   })
 )
 

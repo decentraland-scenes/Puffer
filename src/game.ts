@@ -1,32 +1,32 @@
 import * as utils from '@dcl/ecs-scene-utils'
 
 /// Ground
-let ground = new Entity()
+const ground = new Entity()
 ground.addComponent(new GLTFShape('models/FloorBaseDirt_01.glb'))
 ground.addComponent(
   new Transform({
-    position: new Vector3(8, 0, 8),
+    position: new Vector3(8, 0, 8)
   })
 )
 engine.addEntity(ground)
 
 // Reference scale values
-let deflatedScale = new Vector3(0.05, 0.05, 0.065)
-let inflatedScale = new Vector3(0.11, 0.11, 0.075)
+const deflatedScale = new Vector3(0.05, 0.05, 0.065)
+const inflatedScale = new Vector3(0.11, 0.11, 0.075)
 
 // Create fish
-let puffer = new Entity()
+const puffer = new Entity()
 puffer.addComponent(new GLTFShape('models/puffer.gltf'))
 puffer.addComponent(
   new Transform({
     position: new Vector3(8, 1, 8),
-    scale: deflatedScale,
+    scale: deflatedScale
   })
 )
 engine.addEntity(puffer)
 
 // sound when deflating
-let deflatedSound = new AudioClip('sounds/deflate.wav')
+const deflatedSound = new AudioClip('sounds/deflate.wav')
 puffer.addComponent(new AudioSource(deflatedSound))
 
 // Reaction when clicked
@@ -44,7 +44,7 @@ puffer.addComponent(
   new utils.TriggerComponent(new utils.TriggerSphereShape(2), {
     onCameraEnter: () => {
       inflateFish()
-    },
+    }
   })
 )
 
